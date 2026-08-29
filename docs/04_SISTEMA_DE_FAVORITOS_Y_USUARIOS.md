@@ -46,3 +46,12 @@ stateDiagram-v2
    * En la cabecera del sitio aparece un punto rojo palpitante (`.badge-alert-dot`) junto al botón de favoritos.
    * En la página de favoritos (`/favoritos/`), la obra muestra una insignia superior `¡NUEVO!`.
 4. **Reseteo al Leer**: Al abrir el capítulo o mediante el endpoint AJAX `lectorthema_mark_read`, la alerta vuelve a `0`.
+
+---
+
+## 3. Requisito de Cuenta y Experiencia de Usuario
+
+Para garantizar la integridad de las bibliotecas y el control de notificaciones:
+- **Favoritos**: Si un usuario no autenticado hace clic en "Agregar a Favoritos", el sistema intercepta el clic y despliega automáticamente el modal de autenticación (`#mangaAuthModal`) invitándolo a iniciar sesión o crear su cuenta.
+- **Comentarios en Manga y Capítulos**: Los formularios de comentarios están reservados exclusivamente para usuarios registrados; los visitantes ven una tarjeta de llamada a la acción ("Únete a la comunidad de LectorThema") con accesos directos para registrarse o identificarse.
+

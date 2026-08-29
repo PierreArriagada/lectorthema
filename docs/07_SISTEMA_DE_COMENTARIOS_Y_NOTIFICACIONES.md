@@ -7,10 +7,13 @@ El tema **LectorThema** implementa un sistema avanzado de comunidad altamente op
 ### Comentarios y Hilos (Threads)
 Los comentarios se guardan en la tabla estándar `wp_comments`, lo que mantiene compatibilidad total con plugins antispam (Akismet) y el panel de administración de WordPress.
 
-1. **AJAX Submission (`comments-realtime.js`)**: Cuando el usuario envía el formulario (`#commentform`), interceptamos el evento `submit` y hacemos la petición a `admin-ajax.php`.
-2. **Backend (`inc/comments-system.php`)**: El endpoint `lectorthema_ajax_submit_comment_handler` procesa los datos y utiliza `wp_new_comment()`.
-3. **Inyección en el DOM**: Tras guardarse, el servidor retorna el HTML exacto del comentario (renderizado por la función `lectorthema_custom_comment_render`). JavaScript toma este HTML y lo inyecta inmediatamente en la lista sin necesidad de recargar la página.
-4. **Respuestas (Replies)**: Al responder un comentario, el JS mueve temporalmente el formulario principal debajo del comentario destino y asocia el ID (`comment_parent`). Tras publicarlo de forma asíncrona, el comentario hijo se anida en una etiqueta `ul.children` del padre.
+1. **Obligatoriedad de Cuenta (Auth Wall)**:
+   - Para comentar en la ficha de cualquier manga o en los capítulos individuales, el usuario debe poseer una cuenta activa y estar autenticado.
+   - A los visitantes no autenticados se les presenta una tarjeta de invitación a la comunidad (**Crear Cuenta / Iniciar Sesión**) con acceso directo al modal de autenticación. Se desactivan por completo los formularios anónimos para proteger el sitio contra spam y fomentar el registro.
+2. **AJAX Submission (`comments-realtime.js`)**: Cuando el usuario envía el formulario (`#commentform`), interceptamos el evento `submit` y hacemos la petición a `admin-ajax.php`.
+3. **Backend (`inc/comments-system.php`)**: El endpoint `lectorthema_ajax_submit_comment_handler` procesa los datos y utiliza `wp_new_comment()`.
+4. **Inyección en el DOM**: Tras guardarse, el servidor retorna el HTML exacto del comentario (renderizado por la función `lectorthema_custom_comment_render`). JavaScript toma este HTML y lo inyecta inmediatamente en la lista sin necesidad de recargar la página.
+5. **Respuestas (Replies)**: Al responder un comentario, el JS mueve temporalmente el formulario principal debajo del comentario destino y asocia el ID (`comment_parent`). Tras publicarlo de forma asíncrona, el comentario hijo se anida en una etiqueta `ul.children` del padre.
 
 ### Sistema de Notificaciones
 A diferencia de los comentarios, las notificaciones se almacenan en una tabla personalizada (`wp_manga_notifications`) para un rendimiento de consultas extremo (evitando búsquedas costosas en user_meta u options).

@@ -86,3 +86,88 @@ Añade o elimina una obra de la biblioteca de favoritos del usuario autenticado.
   }
 }
 ```
+
+---
+
+## 4. Endpoint: Publicar Comentario o Respuesta (`lectorthema_ajax_submit_comment`)
+
+Permite a los usuarios registrados publicar comentarios o responder en hilos de forma asíncrona.
+
+* **URL**: `/wp-admin/admin-ajax.php`
+* **Método**: `POST`
+* **Requiere Autenticación**: Sí
+
+### Parámetros de la Petición
+| Campo | Tipo | Requerido | Descripción |
+| :--- | :--- | :--- | :--- |
+| `action` | `string` | Sí | `lectorthema_ajax_submit_comment` |
+| `security` | `string` | Sí | Token Nonce (`lectorthema_nonce`) |
+| `post_id` | `integer` | Sí | ID del manga o capítulo |
+| `comment` | `string` | Sí | Contenido del comentario |
+| `comment_parent` | `integer` | No | ID del comentario padre (`0` si es raíz) |
+
+### Respuesta Exitosa
+```json
+{
+  "success": true,
+  "data": {
+    "message": "Comentario publicado con éxito.",
+    "html": "<li class=\"custom-comment-item\" ...>...</li>",
+    "parent": 0
+  }
+}
+```
+
+---
+
+## 5. Endpoint: Reportar Comentario (`lectorthema_ajax_report_comment`)
+
+Envía un reporte por contenido inapropiado. Si supera 5 reportes únicos, el comentario se envía a revisión.
+
+* **URL**: `/wp-admin/admin-ajax.php`
+* **Método**: `POST`
+* **Requiere Autenticación**: Sí
+
+### Parámetros de la Petición
+| Campo | Tipo | Requerido | Descripción |
+| :--- | :--- | :--- | :--- |
+| `action` | `string` | Sí | `lectorthema_ajax_report_comment` |
+| `security` | `string` | Sí | Token Nonce (`lectorthema_nonce`) |
+| `comment_id` | `integer` | Sí | ID del comentario a reportar |
+
+---
+
+## 6. Endpoint: Obtener Notificaciones (`lectorthema_ajax_get_notifications`)
+
+Retorna el contador de notificaciones no leídas y el listado HTML de las últimas 10 alertas.
+
+* **URL**: `/wp-admin/admin-ajax.php`
+* **Método**: `POST`
+* **Requiere Autenticación**: Sí
+
+### Parámetros de la Petición
+| Campo | Tipo | Requerido | Descripción |
+| :--- | :--- | :--- | :--- |
+| `action` | `string` | Sí | `lectorthema_ajax_get_notifications` |
+| `security` | `string` | Sí | Token Nonce (`lectorthema_nonce`) |
+
+### Respuesta Exitosa
+```json
+{
+  "success": true,
+  "data": {
+    "unread_count": 3,
+    "html": "<a href=\"...\" class=\"notification-item unread\">...</a>"
+  }
+}
+```
+
+---
+
+## 7. Endpoint: Marcar Notificaciones Leídas (`lectorthema_ajax_mark_notifications_read`)
+
+Marca todas las notificaciones pendientes del usuario como leídas.
+
+* **URL**: `/wp-admin/admin-ajax.php`
+* **Método**: `POST`
+* **Requiere Autenticación**: Sí
