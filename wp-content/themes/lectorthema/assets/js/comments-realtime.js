@@ -63,16 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (replyFormContainer) replyFormContainer.style.display = 'none';
             document.getElementById('comment_parent').value = '0';
             
+            const cancelBtn = document.getElementById('cancel-comment-reply-link');
+            if (cancelBtn) cancelBtn.style.display = 'none';
+
             // Move form back to main container
             const mainContainer = document.getElementById('lectorthema-main-comment-form');
             if (mainContainer) mainContainer.appendChild(commentForm);
             
           } else {
+            // Remove empty placeholder if present
+            const emptyNotice = document.getElementById('no-comments-yet');
+            if (emptyNotice) emptyNotice.remove();
+
             // Top level comment
             if (commentListContainer) {
               commentListContainer.insertAdjacentHTML('afterbegin', newCommentHtml);
             } else {
-              // If there was no comment list before, reload to show the structure (edge case)
               window.location.reload();
             }
           }
@@ -111,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         replyContainer.appendChild(commentForm);
         replyContainer.style.display = 'block';
         document.getElementById('comment_parent').value = commentId;
+        const cancelBtn = document.getElementById('cancel-comment-reply-link');
+        if (cancelBtn) cancelBtn.style.display = 'inline-flex';
         commentForm.querySelector('textarea[name="comment"]').focus();
       }
     }
@@ -123,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mainContainer && commentForm) {
         mainContainer.appendChild(commentForm);
         document.getElementById('comment_parent').value = '0';
+        btnCancelReply.style.display = 'none';
         document.querySelectorAll('.reply-form-container').forEach(el => el.style.display = 'none');
       }
     }

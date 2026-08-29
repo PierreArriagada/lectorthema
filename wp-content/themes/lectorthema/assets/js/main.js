@@ -57,14 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const authForms = document.querySelectorAll('.auth-form-wrap');
 
   if (authModal) {
-    // Abrir Modal
-    openAuthBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    // Abrir Modal (Delegación de eventos para capturar cualquier botón con .btn-open-auth)
+    document.addEventListener('click', (e) => {
+      const openBtn = e.target.closest('.btn-open-auth');
+      if (openBtn) {
         e.preventDefault();
-        const tab = btn.getAttribute('data-auth-tab') || 'login';
+        const tab = openBtn.getAttribute('data-auth-tab') || 'login';
         authModal.classList.add('open');
         switchAuthTab(tab);
-      });
+      }
     });
 
     // Cerrar Modal
