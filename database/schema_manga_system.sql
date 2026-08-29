@@ -79,4 +79,21 @@ CREATE TABLE IF NOT EXISTS `wp_manga_reading_history` (
   KEY `idx_user_history` (`user_id`, `last_read_at` DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+-- ------------------------------------------------------------------------------
+-- 5. Tabla de Notificaciones (wp_manga_notifications)
+-- Gestiona notificaciones persistentes (ej. respuestas a comentarios)
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wp_manga_notifications` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `sender_id` BIGINT(20) UNSIGNED DEFAULT NULL,
+  `type` VARCHAR(32) NOT NULL,
+  `reference_id` BIGINT(20) UNSIGNED NOT NULL,
+  `is_read` TINYINT(1) NOT NULL DEFAULT 0,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_user_read` (`user_id`, `is_read`),
+  KEY `idx_user_created` (`user_id`, `created_at` DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;

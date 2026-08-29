@@ -37,10 +37,14 @@ if ($user_id) {
     <meta name="theme-color" content="#070709">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     
-    <!-- Script de inicialización de tema sin parpadeo -->
+    <!-- Script de inicialización de tema Automático / Manual -->
     <script>
         (function() {
-            const savedTheme = localStorage.getItem('lectorThemaTheme') || 'dark';
+            let savedTheme = localStorage.getItem('lectorThemaTheme');
+            if (!savedTheme) {
+                // Auto-detect system preference
+                savedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
             document.documentElement.setAttribute('data-theme', savedTheme);
         })();
     </script>
@@ -100,11 +104,13 @@ if ($user_id) {
                 <?php endif; ?>
             </a>
 
-            <!-- Botón de Modo Claro / Modo Oscuro -->
-            <button type="button" class="btn-header-icon-btn btn-theme-toggle" id="btnThemeToggle" title="<?php esc_attr_e('Cambiar Tema Claro / Oscuro', 'lectorthema'); ?>" aria-label="<?php esc_attr_e('Cambiar Tema', 'lectorthema'); ?>">
-                <span class="theme-icon-dark"><?php echo lectorthema_svg('moon', 'svg-moon-nav', 16); ?></span>
-                <span class="theme-icon-light"><?php echo lectorthema_svg('sun', 'svg-sun-nav', 16); ?></span>
-            </button>
+            <!-- Botón de Notificaciones (Reemplaza Modo Oscuro) -->
+            <?php if (is_user_logged_in()): ?>
+                <button type="button" class="btn-header-icon-btn btn-notifications-toggle" id="btnNotificationsToggle" title="<?php esc_attr_e('Notificaciones', 'lectorthema'); ?>" aria-label="<?php esc_attr_e('Notificaciones', 'lectorthema'); ?>">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="badge-alert-dot" id="notificationsUnreadBadge" style="display:none;" title="<?php esc_attr_e('Nuevas notificaciones', 'lectorthema'); ?>"></span>
+                </button>
+            <?php endif; ?>
 
             <!-- Usuario Desktop & Móvil -->
             <?php if (is_user_logged_in()): 
@@ -192,8 +198,19 @@ if ($user_id) {
         </a>
     </nav>
 
+    <!-- Botón de Tema Móvil / Drawer -->
+    <div style="padding: 10px 0; border-top: 1px solid var(--border); margin-top: 15px;">
+        <button type="button" class="btn-theme-toggle" id="btnThemeToggle" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 12px; background: var(--surface-secondary); border-radius: var(--radius-sm); border: none; cursor: pointer; color: var(--text-primary); font-weight: 600;">
+            <span><?php _e('Tema Visual', 'lectorthema'); ?></span>
+            <div style="display: flex; gap: 8px;">
+                <span class="theme-icon-dark" style="color: var(--accent);"><i class="fa-solid fa-moon"></i></span>
+                <span class="theme-icon-light" style="color: var(--warning);"><i class="fa-solid fa-sun"></i></span>
+            </div>
+        </button>
+    </div>
+
     <!-- Estado de Usuario en Drawer -->
-    <div class="mobile-drawer-user-section" style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border);">
+    <div class="mobile-drawer-user-section" style="margin-top: 15px; padding-top: 20px; border-top: 1px solid var(--border);">
         <?php if (is_user_logged_in()): 
             $current_user = wp_get_current_user();
         ?>

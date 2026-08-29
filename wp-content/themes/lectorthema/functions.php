@@ -96,7 +96,9 @@ function lectorthema_enqueue_scripts() {
     wp_enqueue_script('lectorthema-slider', LECTORTHEMA_URI . '/assets/js/slider.js', [], LECTORTHEMA_VERSION, true);
     wp_enqueue_script('lectorthema-favorites', LECTORTHEMA_URI . '/assets/js/favorites.js', [], LECTORTHEMA_VERSION, true);
     wp_enqueue_script('lectorthema-filter', LECTORTHEMA_URI . '/assets/js/chapter-filter.js', [], LECTORTHEMA_VERSION, true);
-    wp_enqueue_script('lectorthema-main-js', LECTORTHEMA_URI . '/assets/js/main.js', ['lectorthema-slider', 'lectorthema-favorites'], LECTORTHEMA_VERSION, true);
+    wp_enqueue_script('lectorthema-comments-realtime', LECTORTHEMA_URI . '/assets/js/comments-realtime.js', [], LECTORTHEMA_VERSION, true);
+    wp_enqueue_script('lectorthema-notifications', LECTORTHEMA_URI . '/assets/js/notifications.js', [], LECTORTHEMA_VERSION, true);
+    wp_enqueue_script('lectorthema-main-js', LECTORTHEMA_URI . '/assets/js/main.js', ['lectorthema-slider', 'lectorthema-favorites', 'lectorthema-comments-realtime', 'lectorthema-notifications'], LECTORTHEMA_VERSION, true);
 
     // Localización de variables para AJAX con protección CSRF Nonce
     wp_localize_script('lectorthema-main-js', 'lectorThemaData', [
@@ -124,6 +126,7 @@ require_once LECTORTHEMA_DIR . '/inc/custom-post-types.php';
 require_once LECTORTHEMA_DIR . '/inc/taxonomies.php';
 require_once LECTORTHEMA_DIR . '/inc/custom-fields.php';
 require_once LECTORTHEMA_DIR . '/inc/favorites-system.php';
+require_once LECTORTHEMA_DIR . '/inc/comments-system.php';
 require_once LECTORTHEMA_DIR . '/inc/views-counter.php';
 require_once LECTORTHEMA_DIR . '/inc/svg-icons.php';
 require_once LECTORTHEMA_DIR . '/inc/demo-importer.php';

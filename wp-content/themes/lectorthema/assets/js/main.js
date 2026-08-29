@@ -261,4 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('lectorThemaTheme', newTheme);
     });
   }
+
+  // Escuchar cambios automáticos del sistema si el usuario no ha forzado un tema
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('lectorThemaTheme')) {
+      const newTheme = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    }
+  });
 });
