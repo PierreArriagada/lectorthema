@@ -46,10 +46,9 @@ while (have_posts()): the_post();
     $type_slug = !empty($types) && !is_wp_error($types) ? $types[0]->slug : 'manga';
 
     $genres = get_the_terms($manga_id, 'manga_genre');
-
-    $statuses = get_the_terms($manga_id, 'manga_status');
-    $status_name = !empty($statuses) && !is_wp_error($statuses) ? $statuses[0]->name : __('En emisión', 'lectorthema');
-    $is_ongoing = strtolower($status_name) !== 'finalizado';
+    $status_info = lectorthema_get_manga_status_info($manga_id);
+    $status_name = $status_info['name'];
+    $is_ongoing  = $status_info['is_ongoing'];
 
     // Vistas y Favoritos
     $total_views = lectorthema_get_total_views($manga_id);
@@ -137,9 +136,9 @@ while (have_posts()): the_post();
                         <span class="manga-type-pill type-<?php echo esc_attr($type_slug); ?>">
                             <?php echo esc_html($type_name); ?>
                         </span>
-                        <span class="manga-status-badge <?php echo $is_ongoing ? 'is-ongoing' : 'is-completed'; ?>">
-                            <span class="status-pulse-dot"></span> <?php echo esc_html($status_name); ?>
-                        </span>
+                        <a href="<?php echo esc_url($status_info['term_link']); ?>" class="manga-status-badge <?php echo esc_attr($status_info['class']); ?>" title="<?php printf(esc_attr__('Ver obras %s', 'lectorthema'), esc_attr($status_info['name'])); ?>">
+                            <span class="status-dot"></span> <?php echo esc_html($status_info['name']); ?>
+                        </a>
                     </div>
 
                     <h1 class="manga-info-title"><?php the_title(); ?></h1>
@@ -349,7 +348,9 @@ while (have_posts()): the_post();
                         </li>
                         <li>
                             <span class="detail-name"><?php _e('Estado:', 'lectorthema'); ?></span>
-                            <span class="detail-val" style="color: var(--success); font-weight: 700;"><?php echo esc_html($status_name); ?></span>
+                            <a href="<?php echo esc_url($status_info['term_link']); ?>" class="detail-val" style="color: <?php echo esc_attr($status_info['color_var']); ?>; font-weight: 700; text-decoration: none;">
+                                <i class="<?php echo esc_attr($status_info['icon']); ?>"></i> <?php echo esc_html($status_info['name']); ?>
+                            </a>
                         </li>
                         <li>
                             <span class="detail-name"><?php _e('Lanzamiento:', 'lectorthema'); ?></span>

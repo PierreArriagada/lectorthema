@@ -28,6 +28,9 @@ $types = get_the_terms($manga_id, 'manga_type');
 $type_name = !empty($types) && !is_wp_error($types) ? $types[0]->name : 'Manga';
 $type_slug = !empty($types) && !is_wp_error($types) ? $types[0]->slug : 'manga';
 
+// Obtener Estado de la Obra
+$status_info = lectorthema_get_manga_status_info($manga_id);
+
 // Obtener Géneros (primeros 2 para el resumen visual)
 $genres = get_the_terms($manga_id, 'manga_genre');
 $genre_names = [];
@@ -77,6 +80,11 @@ wp_reset_postdata();
                 <!-- Tipo de Obra -->
                 <span class="manga-type-pill type-<?php echo esc_attr($type_slug); ?>">
                     <?php echo esc_html($type_name); ?>
+                </span>
+
+                <!-- Estado de la Obra -->
+                <span class="manga-status-badge <?php echo esc_attr($status_info['class']); ?>" title="<?php printf(esc_attr__('Estado: %s', 'lectorthema'), esc_attr($status_info['name'])); ?>" style="padding: 2px 7px; font-size: 10.5px;">
+                    <span class="status-dot"></span> <?php echo esc_html($status_info['name']); ?>
                 </span>
             </div>
 

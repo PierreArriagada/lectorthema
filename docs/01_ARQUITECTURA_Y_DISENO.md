@@ -118,3 +118,17 @@ La vista de información del manga está diseñada según los estándares de Ori
 | **Acento Acción / Lectura** | `#F97316` / `#EA580C` | `#EA580C` | Botón "Último Cap.", pestañas activas y estrellas de puntuación. |
 | **Éxito / Ongoing** | `#22C55E` | `#16A34A` | Indicador "Ongoing / En emisión". |
 | **Error / HOT / Nuevo** | `#EF4444` | `#DC2626` | Badge "Nuevo" y alertas. |
+
+---
+
+## 5. Estados Canónicos de Publicación (`manga_status`)
+
+Toda obra en LectorThema pertenece a uno de los 4 estados canónicos, identificados con insignias visuales unificadas:
+
+| Estado | Slug | Color | Indicador Visual | Descripción |
+| :--- | :--- | :--- | :--- | :--- |
+| **En emisión** | `en-emision` | Verde (`#10B981`) | Punto verde palpitante | Obras en curso que reciben nuevos capítulos activamente. |
+| **Pausado** | `pausado` | Ámbar (`#F59E0B`) | Punto amarillo | Obras en pausa temporal o hiatus por el autor/editorial. |
+| **Terminado** | `terminado` | Morado / Azul (`#A855F7`) | Punto morado | Obras con la historia totalmente finalizada y completa. |
+| **Abandonado** | `abandonado` | Rojo / Gris (`#EF4444`) | Punto rojo | Obras canceladas o discontinuadas. |
+

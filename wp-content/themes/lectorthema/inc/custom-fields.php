@@ -236,3 +236,58 @@ function lectorthema_save_meta_data($post_id) {
     }
 }
 add_action('save_post', 'lectorthema_save_meta_data');
+
+/**
+ * 5. Helper para obtener la información estilizada del Estado de la Obra
+ */
+function lectorthema_get_manga_status_info($manga_id) {
+    $statuses = get_the_terms($manga_id, 'manga_status');
+    $status_name = !empty($statuses) && !is_wp_error($statuses) ? $statuses[0]->name : __('En emisión', 'lectorthema');
+    $status_slug = !empty($statuses) && !is_wp_error($statuses) ? $statuses[0]->slug : 'en-emision';
+
+    // Normalización de slugs y estados
+    switch ($status_slug) {
+        case 'finalizado':
+        case 'terminado':
+            $slug_canonical = 'terminado';
+            $css_class = 'status-terminado';
+            $color_var = 'var(--primary)';
+            $icon = 'fa-circle-check';
+            break;
+
+        case 'en-pausa':
+        case 'pausado':
+            $slug_canonical = 'pausado';
+            $css_class = 'status-pausado';
+            $color_var = 'var(--warning)';
+            $icon = 'fa-circle-pause';
+            break;
+
+        case 'cancelado':
+        case 'abandonado':
+            $slug_canonical = 'abandonado';
+            $css_class = 'status-abandonado';
+            $color_var = 'var(--error)';
+            $icon = 'fa-circle-xmark';
+            break;
+
+        case 'en-emision':
+        default:
+            $slug_canonical = 'en-emision';
+            $css_class = 'status-en-emision';
+            $color_var = 'var(--success)';
+            $icon = 'fa-circle-play';
+            break;
+    }
+
+    return [
+        'name'          => $status_name,
+        'slug'          => $slug_canonical,
+        'original_slug' => $status_slug,
+        'class'         => $css_class,
+        'color_var'     => $color_var,
+        'icon'          => $icon,
+        'is_ongoing'    => ($slug_canonical === 'en-emision'),
+        'term_link'     => (!empty($statuses) && !is_wp_error($statuses)) ? get_term_link($statuses[0]) : home_url('/mangas/')
+    ];
+}

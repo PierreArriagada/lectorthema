@@ -124,12 +124,16 @@ function lectorthema_create_default_terms() {
         }
     }
 
-    // Estados por defecto
+    // Estados por defecto canónicos de LectorThema
     $default_statuses = [
-        'En emisión' => 'en-emision',
-        'Finalizado' => 'finalizado',
-        'En pausa'   => 'en-pausa',
-        'Cancelado'  => 'cancelado'
+        'En emisión'  => 'en-emision',
+        'Pausado'     => 'pausado',
+        'Terminado'   => 'terminado',
+        'Abandonado'  => 'abandonado',
+        // Compatibilidad adicional
+        'Finalizado'  => 'finalizado',
+        'En pausa'    => 'en-pausa',
+        'Cancelado'   => 'cancelado'
     ];
 
     foreach ($default_statuses as $name => $slug) {
