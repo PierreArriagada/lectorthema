@@ -1,0 +1,764 @@
+/* ==============================================================================
+   LectorThema - Estilos de la Portada Principal (front-page.css)
+   Vista: front-page.php (Hero Slider Integrado, Top Comunidad, Géneros y Widgets)
+   Diseño Integrado: Sin card contenedora, alineación exacta con márgenes de la web
+   ============================================================================== */
+
+/* ==============================================================================
+   1. HERO SLIDER SUPERIOR (ALINEADO 100% CON LOS MÁRGENES DE LA WEB)
+   ============================================================================== */
+.hero-slider-section {
+  position: relative;
+  margin: 15px 0 20px 0;
+}
+
+.hero-slider-container {
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.hero-slides-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.hero-slide {
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 0 25px 0; /* Cero padding lateral para alineación perfecta */
+  box-sizing: border-box;
+}
+
+.hero-slide-backdrop,
+.hero-slide-overlay {
+  display: none; /* Sin manchas ni nubes grises, integrado directo al fondo */
+}
+
+.hero-slide-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Portada con Elevación 3D */
+.hero-slide-poster {
+  width: 185px;
+  height: 260px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  background: var(--surface-secondary);
+}
+
+[data-theme="light"] .hero-slide-poster {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+.hero-slide-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-slide-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Fila de Insignias */
+.hero-slide-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-rating-pill {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  color: var(--warning);
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
+  font-size: 11.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero-status-pill {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #22C55E;
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.hero-genres-inline {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+[data-theme="light"] .hero-genres-inline {
+  color: #4F46E5;
+  font-weight: 700;
+}
+
+/* Título */
+.hero-slide-title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.hero-slide-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.hero-slide-title a:hover {
+  color: var(--primary);
+}
+
+/* Meta de Último Capítulo */
+.hero-latest-chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+}
+
+.hero-chap-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.hero-chap-badge {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
+  font-weight: 800;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.hero-chap-badge:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: var(--error);
+}
+
+[data-theme="light"] .hero-chap-badge {
+  color: #DC2626;
+  background: #FEF2F2;
+  border-color: #FECACA;
+}
+
+.hero-chap-time {
+  color: var(--text-muted);
+  font-size: 11.5px;
+}
+
+/* Sinopsis */
+.hero-slide-synopsis {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 580px;
+}
+
+/* Botones CTA */
+.hero-slide-cta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-hero-read {
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-hero-read:hover {
+  background: linear-gradient(135deg, #818CF8 0%, #6366F1 100%);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .btn-hero-read {
+  background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+.btn-hero-info {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  padding: 10px 18px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-hero-info:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-hero-info.is-active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Barra de Controles Inferiores */
+.hero-slider-bottom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.hero-slider-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-dot.active {
+  width: 24px;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+[data-theme="light"] .hero-dot {
+  background: #CBD5E1;
+}
+
+[data-theme="light"] .hero-dot.active {
+  background: #4F46E5;
+  box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
+}
+
+/* Botones de Navegación agrupados abajo a la derecha */
+.hero-slider-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-slider-nav {
+  position: static;
+  transform: none;
+  width: 34px;
+  height: 34px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-slider-nav:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+[data-theme="light"] .hero-slider-nav {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #0F172A;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .hero-slider-nav:hover {
+  background: #4F46E5;
+  border-color: #4F46E5;
+  color: #FFFFFF;
+}
+
+/* ==============================================================================
+   2. TOP DE LA COMUNIDAD Y TOP POR GÉNERO (CARD UNIFICADA)
+   ============================================================================== */
+.top-community-section {
+  margin-bottom: 35px;
+}
+
+.top-rankings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 16px;
+}
+
+.top-rankings-grid.is-hidden {
+  display: none !important;
+}
+
+.top-rank-card {
+  position: relative;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.top-rank-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-card-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Portada 3:4 */
+.top-rank-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--surface);
+}
+
+.top-rank-cover-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.top-rank-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.top-rank-card:hover .top-rank-cover {
+  transform: scale(1.04);
+}
+
+/* Barra Superior Sobre Portada */
+.top-rank-card-top-bar {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: 7px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.top-rank-card-top-bar .rank-badge-wrap,
+.top-rank-card-top-bar .manga-type-pill {
+  pointer-events: auto;
+  position: static;
+}
+
+.rank-number {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 800;
+  flex-shrink: 0;
+  background: rgba(13, 13, 18, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.rank-number.rank-1 {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #070709;
+  border-color: #F59E0B;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.45);
+}
+
+.rank-number.rank-2 {
+  background: linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%);
+  color: #070709;
+  border-color: #CBD5E1;
+}
+
+.rank-number.rank-3 {
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  color: #FFFFFF;
+  border-color: #EA580C;
+}
+
+/* Degradado Inferior Sobre Portada: Puntuación y Título */
+.top-rank-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 36px 8px 8px 8px;
+  background: linear-gradient(to top, rgba(7, 7, 9, 0.98) 0%, rgba(7, 7, 9, 0.80) 65%, transparent 100%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.top-rank-rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.top-rank-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #F59E0B !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+}
+
+.top-rank-rating-pill i {
+  font-size: 10px;
+}
+
+.top-rank-views-pill {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.88) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.top-rank-title {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  pointer-events: auto;
+}
+
+.top-rank-title a {
+  color: #FFFFFF !important;
+  text-decoration: none;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  transition: color var(--transition-fast);
+}
+
+.top-rank-card:hover .top-rank-title a {
+  color: #818CF8 !important;
+}
+
+/* Pie de Tarjeta: Capítulos ABAJO */
+.top-rank-bottom-bar {
+  padding: 6px 8px;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-card);
+}
+
+.top-rank-caps-row {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.cap-pill {
+  flex: 1;
+  text-align: center;
+  padding: 4px 5px;
+  border-radius: var(--radius-xs);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+/* Último Capítulo SIEMPRE en ROJO (#EF4444 / #DC2626) */
+.cap-pill.cap-latest-red {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  font-weight: 800;
+}
+
+.cap-pill.cap-latest-red:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: #EF4444;
+}
+
+/* Capítulo Anterior Neutro */
+.cap-pill.cap-prev-neutral {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cap-pill.cap-prev-neutral:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-card-hover);
+}
+
+/* Pestañas de Tops */
+.top-tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-secondary);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+}
+
+.top-tab-btn {
+  padding: 6px 15px;
+  border-radius: var(--radius-full);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.top-tab-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* Adaptación Específica Top Cards en Modo Claro */
+[data-theme="light"] .top-rank-card {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .top-rank-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #CBD5E1;
+}
+
+[data-theme="light"] .top-rank-title,
+[data-theme="light"] .top-rank-title a {
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .top-rank-bottom-bar {
+  background: #F8FAFC;
+  border-top-color: #E2E8F0;
+}
+
+[data-theme="light"] .cap-pill.cap-latest-red {
+  background: #FEF2F2;
+  border-color: #FECACA;
+  color: #DC2626;
+}
+
+[data-theme="light"] .cap-pill.cap-latest-red:hover {
+  background: #FEE2E2;
+}
+
+[data-theme="light"] .cap-pill.cap-prev-neutral {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #1E293B;
+}
+
+[data-theme="light"] .cap-pill.cap-prev-neutral:hover {
+  background: #F1F5F9;
+}
+
+/* ==============================================================================
+   3. SECCIÓN DE GÉNEROS EN PORTADA
+   ============================================================================== */
+.genre-pills-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 18px;
+  scrollbar-width: thin;
+}
+
+.genre-pill-btn {
+  padding: 6px 14px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.genre-pill-btn:hover, .genre-pill-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* ==============================================================================
+   4. WIDGETS LATERALES DE PORTADA
+   ============================================================================== */
+.top-rankings-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.top-rank-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 9px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.top-rank-item:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-card-hover);
+  transform: translateX(2px);
+}
+
+.rank-thumb {
+  width: 38px;
+  height: 50px;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.rank-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rank-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rank-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.rank-meta {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-muted);
+}

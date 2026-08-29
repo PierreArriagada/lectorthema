@@ -1,7 +1,7 @@
-# MangaNexus - Arquitectura y Guía de Diseño
+# LectorThema - Arquitectura y Guía de Diseño
 
 ## 1. Visión General del Proyecto
-**MangaNexus** es una solución integral sobre WordPress diseñada para portales de información, lectura y seguimiento de:
+**LectorThema** es una solución integral sobre WordPress diseñada para portales de información, lectura y seguimiento de:
 * **Manga (漫画)**: Obras japonesas tradicionales.
 * **Manhwa (만화)**: Webtoons verticales coreanos a todo color.
 * **Manhua (漫画)**: Obras chinas de artes marciales y cultivación.
@@ -14,7 +14,7 @@
 Cada vista clave del sistema cuenta con su propio archivo CSS desacoplado que contiene su estructura visual y **sus propias reglas responsivas internas**:
 
 ```text
-wp-content/themes/manga-nexus/assets/css/
+wp-content/themes/lectorthema/assets/css/
 ├── main.css           <-- Estructura base, Reset, Layout, Navbar y Footer (Global)
 ├── components.css     <-- Componentes compartidos (Cards base, Botones, Modales Auth, Toasts)
 ├── front-page.css     <-- Vista Portada: Hero Slider, Top de la Comunidad, Géneros, Widgets

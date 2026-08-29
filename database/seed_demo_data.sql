@@ -1,5 +1,5 @@
 -- ==============================================================================
--- MangaNexus - Datos de Prueba y Demostración (Seed Data)
+-- LectorThema - Datos de Prueba y Demostración (Seed Data)
 -- Contiene registros de muestra para Vistas, Favoritos y Calificaciones
 -- ==============================================================================
 

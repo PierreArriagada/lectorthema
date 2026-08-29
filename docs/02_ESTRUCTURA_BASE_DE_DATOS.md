@@ -1,4 +1,4 @@
-# MangaNexus - Estructura y Esquema de Base de Datos MySQL
+# LectorThema - Estructura y Esquema de Base de Datos MySQL
 
 ## 1. Tablas Personalizadas del Sistema
 

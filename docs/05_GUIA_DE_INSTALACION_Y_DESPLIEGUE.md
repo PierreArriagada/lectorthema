@@ -1,4 +1,4 @@
-# MangaNexus - Guía de Instalación y Despliegue
+# LectorThema - Guía de Instalación y Despliegue
 
 ## 1. Requisitos del Sistema
 * **Docker** >= 20.10 & **Docker Compose** >= 2.0 (para despliegue local o contenerizado).
@@ -27,13 +27,13 @@ Abre tu navegador en:
 
 ### Paso 4: Completar la Instalación Inicial de WordPress
 1. Selecciona el idioma (**Español**).
-2. Título del sitio: **MangaNexus**.
+2. Título del sitio: **LectorThema**.
 3. Nombre de usuario y contraseña de administrador.
 
-### Paso 5: Activar el Tema MangaNexus
+### Paso 5: Activar el Tema LectorThema
 1. Ingresa a `http://localhost:8000/wp-admin/`.
 2. Ve a **Apariencia > Temas**.
-3. Selecciona y activa **MangaNexus**.
+3. Selecciona y activa **LectorThema**.
 4. ¡El tema autoinstalará las tablas personalizadas de base de datos (`wp_manga_favorites`, `wp_manga_views`) y generará el contenido demo de bienvenida automáticamente!
 
 ### Paso 6: Configurar Enlaces Permanentes

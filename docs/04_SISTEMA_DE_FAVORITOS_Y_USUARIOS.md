@@ -1,8 +1,8 @@
-# MangaNexus - Sistema de Favoritos y Notificación de Capítulos
+# LectorThema - Sistema de Favoritos y Notificación de Capítulos
 
 ## 1. Funcionamiento del Sistema de Favoritos
 
-El sistema de favoritos de **MangaNexus** permite a los usuarios registrados mantener una biblioteca personalizada de obras en seguimiento y recibir avisos visuales automáticos cuando se publica un nuevo capítulo.
+El sistema de favoritos de **LectorThema** permite a los usuarios registrados mantener una biblioteca personalizada de obras en seguimiento y recibir avisos visuales automáticos cuando se publica un nuevo capítulo.
 
 ```mermaid
 sequenceDiagram
@@ -13,7 +13,7 @@ sequenceDiagram
     participant DB as MySQL (wp_manga_favorites)
 
     Lector->>UI: Clic en "Agregar a Favoritos"
-    UI->>AJAX: POST action=manga_nexus_toggle_favorite & security=nonce
+    UI->>AJAX: POST action=lectorthema_toggle_favorite & security=nonce
     AJAX->>AJAX: Validar Sesión y Nonce CSRF
     AJAX->>DB: INSERT / DELETE en wp_manga_favorites
     DB-->>AJAX: Confirmación + Total de Seguidores
@@ -45,4 +45,4 @@ stateDiagram-v2
 3. **Indicador Visual**:
    * En la cabecera del sitio aparece un punto rojo palpitante (`.badge-alert-dot`) junto al botón de favoritos.
    * En la página de favoritos (`/favoritos/`), la obra muestra una insignia superior `¡NUEVO!`.
-4. **Reseteo al Leer**: Al abrir el capítulo o mediante el endpoint AJAX `manga_nexus_mark_read`, la alerta vuelve a `0`.
+4. **Reseteo al Leer**: Al abrir el capítulo o mediante el endpoint AJAX `lectorthema_mark_read`, la alerta vuelve a `0`.

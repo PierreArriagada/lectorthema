@@ -1,5 +1,5 @@
 -- ==============================================================================
--- MangaNexus - Esquema de Base de Datos y Tablas Personalizadas
+-- LectorThema - Esquema de Base de Datos y Tablas Personalizadas
 -- Sistema de Alto Rendimiento para Portales de Manga, Manhwa, Manhua y Fan Comics
 -- ==============================================================================
 

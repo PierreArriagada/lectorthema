@@ -1,6 +1,6 @@
-# MangaNexus - Guía de Seguridad y Buenas Prácticas
+# LectorThema - Guía de Seguridad y Buenas Prácticas
 
-La seguridad es el pilar central de **MangaNexus**. El sistema implementa defensas en múltiples capas para garantizar la protección de los datos de los usuarios, evitar ataques de fuerza bruta y neutralizar vulnerabilidades web comunes.
+La seguridad es el pilar central de **LectorThema**. El sistema implementa defensas en múltiples capas para garantizar la protección de los datos de los usuarios, evitar ataques de fuerza bruta y neutralizar vulnerabilidades web comunes.
 
 ---
 
@@ -9,11 +9,11 @@ La seguridad es el pilar central de **MangaNexus**. El sistema implementa defens
 Todas las acciones asíncronas (AJAX) requieren un *Nonce* criptográfico generado por WordPress:
 * **Generación del Nonce**:
   ```php
-  'nonce' => wp_create_nonce('manga_nexus_nonce')
+  'nonce' => wp_create_nonce('lectorthema_nonce')
   ```
 * **Verificación en el Servidor**:
   ```php
-  check_ajax_referer('manga_nexus_nonce', 'security');
+  check_ajax_referer('lectorthema_nonce', 'security');
   ```
 Si la petición no incluye un Nonce válido o ha expirado, el servidor rechaza la ejecución inmediatamente con un código HTTP 403.
 

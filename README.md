@@ -1,4 +1,4 @@
-# 📖 MangaNexus - Tema WordPress y Plataforma de Lectura de Manga
+# 📖 LectorThema - Tema WordPress y Plataforma de Lectura de Manga
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759B.svg?logo=wordpress&logoColor=white)](https://wordpress.org)
@@ -6,7 +6,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com)
 [![Status](https://img.shields.io/badge/Status-Open%20Source-success.svg)]()
 
-**MangaNexus** es un tema y sistema de portal de alto rendimiento para **WordPress**, diseñado específicamente para sitios de información, seguimiento y lectura de:
+**LectorThema** es un tema y sistema de portal de alto rendimiento para **WordPress**, diseñado específicamente para sitios de información, seguimiento y lectura de:
 * 🇯🇵 **Manga (漫画)**: Obras japonesas tradicionales.
 * 🇰🇷 **Manhwa (만화)**: Webtoons verticales coreanos a todo color.
 * 🇨🇳 **Manhua (漫画)**: Obras chinas de artes marciales y cultivación.
@@ -69,7 +69,7 @@ lectorthema/
 │   └── 06_API_Y_ENDPOINTS_AJAX.md
 └── wp-content/
     └── themes/
-        └── manga-nexus/            <-- Tema WordPress MangaNexus
+        └── lectorthema/            <-- Tema WordPress LectorThema
             ├── style.css           <-- Metadatos y tokens CSS globales
             ├── functions.php       <-- Encolado, helpers y configuración del tema
             ├── front-page.php      <-- Portada del sitio
@@ -115,9 +115,9 @@ lectorthema/
 
 ### Opción B: Instalación en un WordPress Existente
 
-1. Copia la carpeta `wp-content/themes/manga-nexus/` dentro de tu directorio `wp-content/themes/`.
+1. Copia la carpeta `wp-content/themes/lectorthema/` dentro de tu directorio `wp-content/themes/`.
 2. Importa el archivo SQL `database/schema_manga_system.sql` en tu base de datos de WordPress para crear las tablas de estadísticas y favoritos.
-3. Ingresa al panel de administración de WordPress (`wp-admin`) -> **Apariencia** -> **Temas** y activa **MangaNexus**.
+3. Ingresa al panel de administración de WordPress (`wp-admin`) -> **Apariencia** -> **Temas** y activa **LectorThema**.
 
 ---
 
