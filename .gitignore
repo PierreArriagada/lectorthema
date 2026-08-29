@@ -1,0 +1,75 @@
+# ==============================================================================
+# Git Ignore - MangaNexus / Lector Manga WordPress Theme
+# Repositorio: https://github.com/PierreArriagada/lectorthema
+# Licencia: GNU General Public License v3.0 (GPL-3.0)
+# ==============================================================================
+
+# Variables de entorno y credenciales sensibles (Mantener .env.example)
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.crt
+wp-config.php
+wp-config-local.php
+
+# WordPress Core y directorios de instalación runtime
+/wp-admin/
+/wp-includes/
+/wp-content/uploads/
+/wp-content/plugins/
+/wp-content/upgrade/
+/wp-content/languages/
+/wp-content/cache/
+/wp-content/advanced-cache.php
+/wp-content/wp-cache-config.php
+
+# Docker Volumes y datos de base de datos en tiempo de ejecución
+manga_db_data/
+wordpress_data/
+*.log
+debug.log
+error_log
+php_error.log
+*.sql.gz
+*.sql.tar.gz
+*.sql.zip
+!database/schema_manga_system.sql
+!database/seed_demo_data.sql
+
+# Node / Herramientas de compilación / Cachés
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+.pnpm-store/
+
+# Archivos de Sistema Operativo y Editores
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDEs y Editores de código
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.gemini/
+.antigravity/
+
+# Archivos Temporales y Backups
+*.tmp
+*.temp
+*.bak
+*.old
+*.cache

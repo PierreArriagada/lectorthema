@@ -1,0 +1,542 @@
+/* ==============================================================================
+   MangaNexus - Componentes Globales Reutilizables (components.css)
+   Componentes: Tarjeta de Manga, Badges, Botones, Modales y Toasts
+   Overlay sobre portada calibrado para máxima visibilidad en Modo Claro y Oscuro
+   ============================================================================== */
+
+/* ==============================================================================
+   1. TARJETA DE MANGA (ÚLTIMOS CAPÍTULOS AGREGADOS)
+   ============================================================================== */
+.manga-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 16px;
+}
+
+.manga-card {
+  position: relative;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.manga-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-card-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Portada 3:4 */
+.manga-card-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--surface);
+}
+
+.manga-card-cover-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.manga-card-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.manga-card:hover .manga-card-cover {
+  transform: scale(1.04);
+}
+
+/* Barra Superior Sobre Portada */
+.manga-card-top-bar {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: 7px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.manga-top-left-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: auto;
+}
+
+/* Badge de Puntuación (★ 9.8) */
+.manga-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(13, 13, 17, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--warning);
+}
+
+.manga-rating-pill i {
+  font-size: 10px;
+}
+
+/* Insignias de Formato / Tipo de Obra */
+.manga-type-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: rgba(13, 13, 17, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.manga-type-pill.type-manhwa {
+  color: #4ADE80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.manga-type-pill.type-manga {
+  color: #818CF8;
+  border-color: rgba(129, 140, 248, 0.4);
+}
+
+.manga-type-pill.type-manhua {
+  color: #FBBF24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+.manga-type-pill.type-fan-comic,
+.manga-type-pill.type-fancomic {
+  color: #C084FC;
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+/* Botón Rápido de Guardado / Favorito */
+.manga-card-fav-btn {
+  pointer-events: auto;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-xs);
+  background: rgba(13, 13, 17, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.manga-card-fav-btn:hover {
+  background: rgba(13, 13, 17, 0.98);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.06);
+}
+
+.manga-card-fav-btn.is-active {
+  background: rgba(168, 85, 247, 0.3);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.svg-card-fav {
+  color: inherit;
+}
+
+/* Degradado Inferior Sobre Imagen (GÉNEROS Y TÍTULO SIEMPRE NÍTIDOS) */
+.manga-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 36px 10px 10px 10px;
+  background: linear-gradient(to top, rgba(7, 7, 9, 0.98) 0%, rgba(7, 7, 9, 0.80) 65%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.manga-card-genres {
+  font-size: 11px;
+  font-weight: 700;
+  color: #93C5FD !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.manga-card-title {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  pointer-events: auto;
+}
+
+.manga-card-title a {
+  color: #FFFFFF !important;
+  text-decoration: none;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  transition: color var(--transition-fast);
+}
+
+.manga-card:hover .manga-card-title a {
+  color: #818CF8 !important;
+}
+
+/* Pie de Tarjeta: Capítulos */
+.manga-card-chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-card);
+}
+
+.chapter-horizontal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: var(--radius-xs);
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all var(--transition-fast);
+}
+
+.chapter-horizontal-row .chap-num {
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chapter-horizontal-row .chap-time {
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+/* Último Capítulo SIEMPRE en ROJO (#EF4444 / #DC2626) */
+.chapter-horizontal-row.ch-latest-red {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.chapter-horizontal-row.ch-latest-red .chap-num,
+.chapter-horizontal-row.ch-latest-red .chap-time {
+  color: #EF4444;
+  font-weight: 700;
+}
+
+.chapter-horizontal-row.ch-latest-red:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #EF4444;
+}
+
+/* Capítulo Anterior Neutro */
+.chapter-horizontal-row.ch-prev-neutral {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chapter-horizontal-row.ch-prev-neutral .chap-num {
+  color: var(--text-primary);
+}
+
+.chapter-horizontal-row.ch-prev-neutral .chap-time {
+  color: var(--text-muted);
+}
+
+.chapter-horizontal-row.ch-prev-neutral:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-card-hover);
+}
+
+/* ==============================================================================
+   2. ADAPTACIÓN ESPECÍFICA DE MODO CLARO (data-theme="light")
+   ============================================================================== */
+[data-theme="light"] .manga-card {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .manga-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #CBD5E1;
+}
+
+/* En Modo Claro, los títulos y géneros sobre la portada se mantienen BLANCOS y nítidos */
+[data-theme="light"] .manga-card-genres {
+  color: #93C5FD !important;
+}
+
+[data-theme="light"] .manga-card-title,
+[data-theme="light"] .manga-card-title a {
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .manga-card-chapters-list {
+  background: #F8FAFC;
+  border-top-color: #E2E8F0;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-latest-red {
+  background: #FEF2F2;
+  border-color: #FECACA;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-latest-red .chap-num,
+[data-theme="light"] .chapter-horizontal-row.ch-latest-red .chap-time {
+  color: #DC2626;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-latest-red:hover {
+  background: #FEE2E2;
+  border-color: #DC2626;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-prev-neutral {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-prev-neutral .chap-num {
+  color: #1E293B;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-prev-neutral .chap-time {
+  color: #64748B;
+}
+
+[data-theme="light"] .chapter-horizontal-row.ch-prev-neutral:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+/* ==============================================================================
+   3. ENCABEZADOS DE SECCIÓN
+   ============================================================================== */
+.section-header-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 18.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  color: var(--primary);
+}
+
+.section-more-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.section-more-link:hover {
+  color: var(--primary);
+}
+
+/* ==============================================================================
+   4. MODAL DE AUTENTICACIÓN
+   ============================================================================== */
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.auth-modal-backdrop.open {
+  display: flex;
+  opacity: 1;
+}
+
+.auth-modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 400px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-modal-close:hover {
+  color: var(--text-primary);
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 8px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.auth-form-group {
+  margin-bottom: 15px;
+}
+
+.auth-form-group label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.auth-form-group input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  outline: none;
+}
+
+.auth-form-group input:focus {
+  border-color: var(--primary);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  height: 40px;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-xs);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 6px;
+}
+
+.auth-submit-btn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.auth-msg-box {
+  padding: 8px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12.5px;
+  margin-bottom: 12px;
+  display: none;
+}
+
+.auth-msg-box.error {
+  display: block;
+  background: var(--surface-secondary);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.auth-msg-box.success {
+  display: block;
+  background: var(--surface-secondary);
+  color: var(--success);
+  border: 1px solid var(--success);
+}

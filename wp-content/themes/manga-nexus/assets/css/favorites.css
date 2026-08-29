@@ -1,0 +1,82 @@
+/* ==============================================================================
+   MangaNexus - Estilos de Favoritos y Catálogos (favorites.css)
+   Vistas: page-favoritos.php, archive-manga.php, taxonomy-*.php
+   ============================================================================== */
+
+/* Cabecera de Página de Archivo / Favoritos */
+.archive-header-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.archive-header-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.archive-header-desc {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+
+/* Estado Vacío de Favoritos */
+.favorites-empty-box {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  max-width: 540px;
+  margin: 40px auto;
+}
+
+.favorites-empty-icon {
+  font-size: 44px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Paginación de Archivo */
+.manga-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.manga-pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.manga-pagination .page-numbers:hover,
+.manga-pagination .page-numbers.current {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}

@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: manga_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_manga_pass_2026
+      MYSQL_DATABASE: manga_wordpress
+      MYSQL_USER: manga_user
+      MYSQL_PASSWORD: manga_secure_pass_2026
+    volumes:
+      - manga_db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - manga_net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: manga_wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: manga_wordpress
+      WORDPRESS_DB_USER: manga_user
+      WORDPRESS_DB_PASSWORD: manga_secure_pass_2026
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content/themes/manga-nexus:/var/www/html/wp-content/themes/manga-nexus
+    networks:
+      - manga_net
+
+volumes:
+  manga_db_data:
+  wordpress_data:
+
+networks:
+  manga_net:
+    driver: bridge
