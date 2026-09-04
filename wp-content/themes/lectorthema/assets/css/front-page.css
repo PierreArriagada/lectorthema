@@ -33,6 +33,7 @@
   align-items: center;
   padding: 10px 0 25px 0; /* Cero padding lateral para alineación perfecta */
   box-sizing: border-box;
+  overflow: hidden; /* Evita que la sombra de la portada de diapositivas adyacentes se filtre en la diapositiva actual */
 }
 
 .hero-slide-backdrop,

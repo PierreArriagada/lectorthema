@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentX = 0;
   let isDragging = false;
 
+  // Estado inicial: solo la primera diapositiva visible para evitar filtraciones de sombra o bordes
+  slides.forEach((slide, idx) => {
+    slide.style.visibility = idx === 0 ? 'visible' : 'hidden';
+  });
+
   function updateSlider(index) {
     if (index < 0) index = slides.length - 1;
     if (index >= slides.length) index = 0;
+
+    // Hacer visible la diapositiva destino antes del desplazamiento
+    slides[index].style.visibility = 'visible';
     currentIndex = index;
 
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -30,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
       dot.classList.toggle('active', idx === currentIndex);
     });
   }
+
+  // Al finalizar la transición, ocultar diapositivas inactivas
+  track.addEventListener('transitionend', () => {
+    slides.forEach((slide, idx) => {
+      slide.style.visibility = idx === currentIndex ? 'visible' : 'hidden';
+    });
+  });
 
   function nextSlide() {
     updateSlider(currentIndex + 1);
@@ -54,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startX = e.touches[0].clientX;
     isDragging = true;
     clearInterval(autoplayTimer);
+    slides.forEach(slide => { slide.style.visibility = 'visible'; });
   }, { passive: true });
 
   slider.addEventListener('touchmove', (e) => {
@@ -71,6 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         prevSlide();
       }
+    } else {
+      slides.forEach((slide, idx) => {
+        slide.style.visibility = idx === currentIndex ? 'visible' : 'hidden';
+      });
     }
     startAutoplay();
   });
