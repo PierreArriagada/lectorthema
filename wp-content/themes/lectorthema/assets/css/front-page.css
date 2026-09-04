@@ -426,13 +426,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 6px;
   pointer-events: none;
+  box-sizing: border-box;
+}
+
+.top-rank-card-top-bar .manga-top-left-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
 }
 
 .top-rank-card-top-bar .rank-badge-wrap,
-.top-rank-card-top-bar .manga-type-pill {
+.top-rank-card-top-bar .manga-type-pill,
+.top-rank-card-top-bar .manga-status-badge {
   pointer-events: auto;
   position: static;
+  flex-shrink: 0;
 }
 
 .rank-number {
@@ -642,7 +653,7 @@
 }
 
 [data-theme="light"] .top-rank-bottom-bar {
-  background: #F8FAFC;
+  background: #FFFFFF;
   border-top-color: #E2E8F0;
 }
 
@@ -654,16 +665,34 @@
 
 [data-theme="light"] .cap-pill.cap-latest-red:hover {
   background: #FEE2E2;
+  border-color: #DC2626;
 }
 
 [data-theme="light"] .cap-pill.cap-prev-neutral {
-  background: #FFFFFF;
+  background: #F8FAFC;
   border-color: #E2E8F0;
-  color: #1E293B;
+  color: #334155;
 }
 
 [data-theme="light"] .cap-pill.cap-prev-neutral:hover {
   background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+[data-theme="light"] .top-tabs-nav {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .top-tab-btn {
+  color: #64748B;
+}
+
+[data-theme="light"] .top-tab-btn.active {
+  background: #4F46E5;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
 }
 
 /* ==============================================================================
@@ -762,3 +791,58 @@
   font-size: 11px;
   color: var(--text-muted);
 }
+
+/* Adaptación Específica Modo Claro: Sidebar y Géneros */
+[data-theme="light"] .genre-pill-btn {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #475569;
+}
+
+[data-theme="light"] .genre-pill-btn:hover,
+[data-theme="light"] .genre-pill-btn.active {
+  background: #4F46E5;
+  color: #FFFFFF;
+  border-color: #4F46E5;
+}
+
+[data-theme="light"] .top-rankings-box {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .top-rank-item {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .top-rank-item:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .rank-thumb {
+  background: #E2E8F0;
+}
+
+[data-theme="light"] .hero-rating-pill {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #D97706;
+}
+
+[data-theme="light"] .btn-hero-info {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  color: #0F172A;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .btn-hero-info:hover {
+  background: #F8FAFC;
+  border-color: #4F46E5;
+  color: #4F46E5;
+}
+

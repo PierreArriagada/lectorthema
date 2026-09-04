@@ -50,6 +50,9 @@ $ch2_num = $ch2 ? (get_post_meta($ch2->ID, '_chapter_number', true) ?: '1') : nu
 $rating = get_post_meta($manga_id, '_manga_rating', true) ?: '9.8';
 $views_total = isset($args['views']) ? (int) $args['views'] : lectorthema_get_total_views($manga_id);
 $views_fmt = lectorthema_format_views($views_total);
+$status_info = lectorthema_get_manga_status_info($manga_id);
+// Determinar si se muestra el estado de forma armónica
+$show_status = isset($args['show_status']) ? (bool) $args['show_status'] : (!is_front_page() && $status_info['slug'] !== 'en-emision');
 ?>
 <article class="top-rank-card" data-rank="<?php echo esc_attr($rank); ?>">
     <div class="top-rank-cover-wrap">
@@ -58,19 +61,27 @@ $views_fmt = lectorthema_format_views($views_total);
             <img src="<?php echo esc_url($cover); ?>" alt="<?php echo esc_attr($manga->post_title); ?>" class="top-rank-cover" loading="lazy">
         </a>
 
-        <!-- Barra Superior: Medalla y Tipo -->
+        <!-- Barra Superior: Medalla, Tipo y Estado -->
         <div class="top-rank-card-top-bar">
-            <?php if ($rank > 0): ?>
-                <div class="rank-badge-wrap">
-                    <span class="rank-number <?php echo $rank <= 3 ? 'rank-' . $rank : ''; ?>">
-                        #<?php echo $rank; ?>
-                    </span>
-                </div>
-            <?php endif; ?>
+            <div class="manga-top-left-group">
+                <?php if ($rank > 0): ?>
+                    <div class="rank-badge-wrap">
+                        <span class="rank-number <?php echo $rank <= 3 ? 'rank-' . $rank : ''; ?>">
+                            #<?php echo $rank; ?>
+                        </span>
+                    </div>
+                <?php endif; ?>
 
-            <span class="manga-type-pill type-<?php echo esc_attr($type_slug); ?>">
-                <?php echo esc_html($type_name); ?>
-            </span>
+                <span class="manga-type-pill type-<?php echo esc_attr($type_slug); ?>">
+                    <?php echo esc_html($type_name); ?>
+                </span>
+            </div>
+
+            <?php if ($show_status): ?>
+                <span class="manga-status-badge <?php echo esc_attr($status_info['class']); ?>" title="<?php printf(esc_attr__('Estado: %s', 'lectorthema'), esc_attr($status_info['name'])); ?>">
+                    <span class="status-dot"></span> <span class="status-text"><?php echo esc_html($status_info['name']); ?></span>
+                </span>
+            <?php endif; ?>
         </div>
 
         <!-- Degradado Inferior Sobre la Portada: Puntuación y Título -->

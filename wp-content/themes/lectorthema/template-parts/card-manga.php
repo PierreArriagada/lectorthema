@@ -48,6 +48,10 @@ if (!$cover_url) {
     $cover_url = $custom_cover ?: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80';
 }
 
+// Obtener Visualizaciones
+$views_total = lectorthema_get_total_views($manga_id);
+$views_fmt   = lectorthema_format_views($views_total);
+
 // Obtener los 2 últimos capítulos
 $chapters_query = new WP_Query([
     'post_type'      => 'chapter',
@@ -60,6 +64,9 @@ $chapters_query = new WP_Query([
 
 $latest_chapters = $chapters_query->posts;
 wp_reset_postdata();
+
+// Determinar si se muestra el estado (en portada 'Últimos Agregados' se omite, en directorios/búsquedas se muestra si es distinto de 'en-emision' o si se solicita)
+$show_status = isset($args['show_status']) ? (bool) $args['show_status'] : (!is_front_page() && $status_info['slug'] !== 'en-emision');
 ?>
 
 <article class="manga-card" data-manga-id="<?php echo esc_attr($manga_id); ?>">
@@ -69,23 +76,20 @@ wp_reset_postdata();
             <img src="<?php echo esc_url($cover_url); ?>" alt="<?php the_title_attribute(); ?>" class="manga-card-cover" loading="lazy">
         </a>
 
-        <!-- Barra Superior de la Card: Puntuación, Tipo y Botón de Favorito Rápido -->
+        <!-- Barra Superior de la Card: Tipo de Obra (Izquierda) y Marcador (Derecha) -->
         <div class="manga-card-top-bar">
             <div class="manga-top-left-group">
-                <!-- Puntuación -->
-                <span class="manga-rating-pill" title="<?php printf(__('Puntuación: %s / 10', 'lectorthema'), esc_attr($rating)); ?>">
-                    <i class="fa-solid fa-star"></i> <?php echo esc_html($rating); ?>
-                </span>
-
                 <!-- Tipo de Obra -->
                 <span class="manga-type-pill type-<?php echo esc_attr($type_slug); ?>">
                     <?php echo esc_html($type_name); ?>
                 </span>
 
-                <!-- Estado de la Obra -->
-                <span class="manga-status-badge <?php echo esc_attr($status_info['class']); ?>" title="<?php printf(esc_attr__('Estado: %s', 'lectorthema'), esc_attr($status_info['name'])); ?>" style="padding: 2px 7px; font-size: 10.5px;">
-                    <span class="status-dot"></span> <?php echo esc_html($status_info['name']); ?>
-                </span>
+                <?php if ($show_status): ?>
+                    <!-- Estado de la Obra (Para vistas secundarias cuando no está en emisión) -->
+                    <span class="manga-status-badge <?php echo esc_attr($status_info['class']); ?>" title="<?php printf(esc_attr__('Estado: %s', 'lectorthema'), esc_attr($status_info['name'])); ?>">
+                        <span class="status-dot"></span> <span class="status-text"><?php echo esc_html($status_info['name']); ?></span>
+                    </span>
+                <?php endif; ?>
             </div>
 
             <!-- Botón de Marcador / Guardar en Favoritos -->
@@ -98,8 +102,21 @@ wp_reset_postdata();
             </button>
         </div>
 
-        <!-- Degradado Inferior Sobre la Imagen con Géneros y Título -->
+        <!-- Degradado Inferior Sobre la Imagen: Métricas (Estrella a la Izquierda, Vistas a la Derecha), Géneros y Título -->
         <div class="manga-card-overlay">
+            <!-- Fila de Puntuación (Izquierda) y Visualizaciones (Derecha) -->
+            <div class="manga-card-rating-row">
+                <span class="rating-val" title="<?php printf(__('Puntuación: %s / 10', 'lectorthema'), esc_attr($rating)); ?>">
+                    <i class="fa-solid fa-star"></i> <?php echo esc_html($rating); ?>
+                </span>
+
+                <?php if ($views_total > 0): ?>
+                    <span class="views-val" title="<?php printf(__('%s visualizaciones', 'lectorthema'), esc_attr($views_fmt)); ?>">
+                        <i class="fa-solid fa-eye"></i> <?php echo esc_html($views_fmt); ?>
+                    </span>
+                <?php endif; ?>
+            </div>
+
             <?php if (!empty($genres_str)): ?>
                 <span class="manga-card-genres"><?php echo esc_html($genres_str); ?></span>
             <?php endif; ?>
