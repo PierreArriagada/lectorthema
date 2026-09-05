@@ -1,0 +1,857 @@
+/* ==============================================================================
+   LectorThema - Estilos del Directorio y Filtrado de Obras (directory.css)
+   Vista: archive-manga.php y taxonomías (manga_type, manga_status, manga_genre)
+   Estética: OriginOS 6 (Obsidian Smoked Glass & Frosted Milky Glass)
+   Soporte completo: Modo Oscuro, Modo Claro y Totalmente Responsive (320px+)
+   ============================================================================== */
+
+/* ==============================================================================
+   1. CABECERA DEL DIRECTORIO
+   ============================================================================== */
+.directory-header-block {
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.directory-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.directory-main-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  letter-spacing: -0.4px;
+}
+
+.directory-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-glass);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.directory-subtitle {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 780px;
+}
+
+/* ==============================================================================
+   2. CONTENEDOR PRINCIPAL DE FILTROS (ORIGINOS 6 GLASS CARD)
+   ============================================================================== */
+.directory-filter-box {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-glass-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.directory-filter-box:focus-within {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* ==============================================================================
+   3. BARRA DE BÚSQUEDA DEL DIRECTORIO
+   ============================================================================== */
+.directory-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.directory-search-input-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.directory-search-icon-left {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  font-size: 14px;
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.directory-search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 42px 0 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.directory-search-input::placeholder {
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.directory-search-input:focus {
+  border-color: var(--primary);
+  background: var(--surface-hover);
+  box-shadow: 0 0 0 3px var(--primary-glass);
+}
+
+.directory-search-input:focus ~ .directory-search-icon-left {
+  color: var(--primary);
+}
+
+/* Botón para limpiar campo de búsqueda (X) */
+.btn-directory-clear {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-directory-clear:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-directory-clear.is-visible {
+  display: inline-flex;
+}
+
+/* Botón Enviar Búsqueda */
+.btn-directory-submit {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-directory-submit:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-directory-submit:active {
+  transform: translateY(0);
+}
+
+/* ==============================================================================
+   4. GRILLA Y FILAS DE FILTROS SECUNDARIOS (FORMATO, ESTADO, GÉNERO, ORDEN)
+   ============================================================================== */
+.directory-filters-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Fila individual de selector de filtros */
+.directory-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.directory-group-label {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.directory-group-label i {
+  font-size: 11px;
+  color: var(--primary);
+}
+
+/* Contenedor de Botones tipo Pill */
+.directory-pills-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Botón individual tipo Pill */
+.directory-pill,
+.tag-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.directory-pill:hover,
+.tag-pill-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Estado Activo de Pill */
+.directory-pill.is-active,
+.tag-pill-btn.active,
+.tag-pill-btn.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+}
+
+/* Indicadores de Estado con Dots Cromáticos */
+.directory-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.directory-pill-dot.dot-en-emision {
+  background-color: var(--success, #22C55E);
+  box-shadow: 0 0 6px var(--success, #22C55E);
+}
+
+.directory-pill-dot.dot-pausado {
+  background-color: var(--warning, #F59E0B);
+  box-shadow: 0 0 6px var(--warning, #F59E0B);
+}
+
+.directory-pill-dot.dot-terminado {
+  background-color: #A855F7;
+  box-shadow: 0 0 6px #A855F7;
+}
+
+.directory-pill-dot.dot-abandonado {
+  background-color: var(--error, #EF4444);
+  box-shadow: 0 0 6px var(--error, #EF4444);
+}
+
+/* Fila de Menús Desplegables (Género y Orden) */
+.directory-dropdowns-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.directory-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.directory-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.directory-select-icon {
+  position: absolute;
+  left: 13px;
+  font-size: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.directory-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 32px 0 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all var(--transition-fast);
+}
+
+.directory-select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.directory-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2.5px var(--primary-glass);
+}
+
+.directory-select-arrow {
+  position: absolute;
+  right: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Opciones del selector estilizadas */
+.directory-select option {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  padding: 8px;
+}
+
+/* ==============================================================================
+   5. BARRA DE RESUMEN DE FILTROS ACTIVOS (CHIPS Y CONTADOR)
+   ============================================================================== */
+.directory-summary-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.directory-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.directory-results-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.directory-results-count i {
+  color: var(--primary);
+  font-size: 12px;
+}
+
+.directory-results-badge {
+  background: var(--primary-glass);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Chips de Filtros Activos */
+.directory-active-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.directory-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.directory-chip-label {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.directory-chip-val {
+  font-weight: 600;
+}
+
+.directory-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-left: 2px;
+  transition: all var(--transition-fast);
+}
+
+.directory-chip:hover {
+  border-color: var(--error);
+  color: #ffffff;
+}
+
+.directory-chip:hover .directory-chip-remove {
+  background: var(--error);
+  color: #ffffff;
+}
+
+/* Botón Limpiar Todos los Filtros */
+.directory-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.directory-reset-btn:hover {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.directory-reset-btn i {
+  font-size: 11px;
+}
+
+/* ==============================================================================
+   6. ESTADO VACÍO (SIN RESULTADOS)
+   ============================================================================== */
+.directory-empty-state {
+  text-align: center;
+  padding: 65px 24px;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.directory-empty-icon-box {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-md);
+  background: var(--primary-glass);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.directory-empty-title {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.directory-empty-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.directory-empty-btn {
+  margin-top: 8px;
+}
+
+/* ==============================================================================
+   7. PAGINACIÓN DEL DIRECTORIO (ROBUSTA CON PARÁMETROS PRESERVADOS)
+   ============================================================================== */
+.directory-pagination {
+  margin-top: 45px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.directory-pagination .pagination-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.directory-pagination .pagination-item {
+  display: inline-flex;
+}
+
+.directory-pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-xs);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.directory-pagination .page-numbers:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.directory-pagination .page-numbers.current,
+.directory-pagination .pagination-item.is-active .page-numbers {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+.directory-pagination .page-numbers.dots {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.directory-pagination .page-numbers.dots:hover {
+  transform: none;
+}
+
+/* ==============================================================================
+   8. ADAPTACIONES ESPECÍFICAS PARA MODO CLARO ([data-theme="light"])
+   ============================================================================== */
+[data-theme="light"] .directory-filter-box {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .directory-search-input {
+  background: #F8FAFC;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .directory-search-input:focus {
+  background: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+[data-theme="light"] .directory-pill {
+  background: #F1F5F9;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .directory-pill:hover {
+  background: #E2E8F0;
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .directory-pill.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+[data-theme="light"] .directory-select {
+  background: #F8FAFC;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .directory-select:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .directory-select option {
+  background: #FFFFFF;
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .directory-summary-bar {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .directory-chip {
+  background: #F1F5F9;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .directory-pagination .page-numbers {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .directory-pagination .page-numbers:hover {
+  background: #F8FAFC;
+  border-color: var(--primary);
+}
+
+[data-theme="light"] .directory-pagination .page-numbers.current {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ==============================================================================
+   9. ADAPTABILIDAD RESPONSIVA (DESKTOP, TABLET Y MÓVIL)
+   ============================================================================== */
+
+/* Tablets y pantallas intermedias (769px - 1024px) */
+@media (max-width: 1024px) {
+  .directory-filter-box {
+    padding: 18px 20px;
+  }
+
+  .directory-dropdowns-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Dispositivos Móviles (<= 768px, adaptado para iPhone SE 375px) */
+@media (max-width: 768px) {
+  .directory-header-block {
+    margin-bottom: 20px;
+    gap: 8px;
+  }
+
+  .directory-main-title {
+    font-size: 21px;
+  }
+
+  .directory-title-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .directory-subtitle {
+    font-size: 13px;
+  }
+
+  .directory-filter-box {
+    padding: 16px 14px;
+    border-radius: var(--radius-sm);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  /* Barra de búsqueda apilada o compacta */
+  .directory-search-row {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .directory-search-input {
+    height: 42px;
+    font-size: 13.5px;
+    padding-left: 36px;
+  }
+
+  .directory-search-icon-left {
+    left: 12px;
+    font-size: 13px;
+  }
+
+  .btn-directory-submit {
+    height: 42px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .btn-directory-submit span {
+    display: none; /* En móvil muestra solo el icono para ahorrar ancho */
+  }
+
+  /* Filas de filtros con scroll suave o flex fluido */
+  .directory-filters-groups {
+    gap: 14px;
+    padding-top: 14px;
+  }
+
+  .directory-filter-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .directory-group-label {
+    min-width: unset;
+    font-size: 11px;
+  }
+
+  .directory-pills-wrap {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .directory-pills-wrap::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+
+  .directory-pill {
+    padding: 6px 12px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Menús desplegables en columna única */
+  .directory-dropdowns-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .directory-select {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  /* Barra de resumen */
+  .directory-summary-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+
+  .directory-summary-left {
+    width: 100%;
+  }
+
+  .directory-reset-btn {
+    align-self: flex-end;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  /* Paginación móvil */
+  .directory-pagination .page-numbers {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12.5px;
+  }
+
+  .directory-pagination .nav-text {
+    display: none;
+  }
+}

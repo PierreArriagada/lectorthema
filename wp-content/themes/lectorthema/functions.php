@@ -85,8 +85,10 @@ function lectorthema_enqueue_scripts() {
         wp_enqueue_style('lectorthema-single-manga', LECTORTHEMA_URI . '/assets/css/single-manga.css', ['lectorthema-components'], LECTORTHEMA_VERSION);
     } elseif (is_singular('chapter')) {
         wp_enqueue_style('lectorthema-reader', LECTORTHEMA_URI . '/assets/css/reader.css', ['lectorthema-components'], LECTORTHEMA_VERSION);
-    } elseif (is_page_template('page-favoritos.php') || is_post_type_archive('manga') || is_tax('manga_type') || is_tax('manga_genre') || is_tax('manga_status')) {
+    } elseif (is_page_template('page-favoritos.php')) {
         wp_enqueue_style('lectorthema-favorites', LECTORTHEMA_URI . '/assets/css/favorites.css', ['lectorthema-components'], LECTORTHEMA_VERSION);
+    } elseif (is_post_type_archive('manga') || is_tax(['manga_type', 'manga_genre', 'manga_status'])) {
+        wp_enqueue_style('lectorthema-directory', LECTORTHEMA_URI . '/assets/css/directory.css', ['lectorthema-components'], LECTORTHEMA_VERSION);
     }
 
     // 3. Estilos Responsivos Dedicados (Sobrescribe media queries)
@@ -98,6 +100,12 @@ function lectorthema_enqueue_scripts() {
     wp_enqueue_script('lectorthema-filter', LECTORTHEMA_URI . '/assets/js/chapter-filter.js', [], LECTORTHEMA_VERSION, true);
     wp_enqueue_script('lectorthema-comments-realtime', LECTORTHEMA_URI . '/assets/js/comments-realtime.js', [], LECTORTHEMA_VERSION, true);
     wp_enqueue_script('lectorthema-notifications', LECTORTHEMA_URI . '/assets/js/notifications.js', [], LECTORTHEMA_VERSION, true);
+
+    // Script interactivo exclusivo para el directorio y taxonomías de catálogo
+    if (is_post_type_archive('manga') || is_tax(['manga_type', 'manga_genre', 'manga_status'])) {
+        wp_enqueue_script('lectorthema-directory-js', LECTORTHEMA_URI . '/assets/js/directory.js', [], LECTORTHEMA_VERSION, true);
+    }
+
     wp_enqueue_script('lectorthema-main-js', LECTORTHEMA_URI . '/assets/js/main.js', ['lectorthema-slider', 'lectorthema-favorites', 'lectorthema-comments-realtime', 'lectorthema-notifications'], LECTORTHEMA_VERSION, true);
 
     // Localización de variables para AJAX con protección CSRF Nonce
@@ -125,6 +133,7 @@ require_once LECTORTHEMA_DIR . '/inc/security-helpers.php';
 require_once LECTORTHEMA_DIR . '/inc/custom-post-types.php';
 require_once LECTORTHEMA_DIR . '/inc/taxonomies.php';
 require_once LECTORTHEMA_DIR . '/inc/custom-fields.php';
+require_once LECTORTHEMA_DIR . '/inc/directory-system.php';
 require_once LECTORTHEMA_DIR . '/inc/favorites-system.php';
 require_once LECTORTHEMA_DIR . '/inc/comments-system.php';
 require_once LECTORTHEMA_DIR . '/inc/views-counter.php';
